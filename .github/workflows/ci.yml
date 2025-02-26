@@ -1,0 +1,25 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - trunk  # This will trigger the CI pipeline when code is pushed to the trunk branch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest  # The environment to run the job
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2  # This checks out your code from the GitHub repository
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # Specifies which version of Node.js to use
+
+      - name: Install dependencies
+        run: npm install  # Installs all dependencies defined in package.json
+
+      - name: Run tests
+        run: npm test  # Runs your tests using Jest
